@@ -50,7 +50,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            // regex:/[^\s　]を使用して半角・全角スペースのみでは登録できないように設定
+            'name' => ['required', 'string', 'max:255', 'regex:/[^\s　]/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);

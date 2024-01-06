@@ -54,11 +54,15 @@
 
  <td>{{ $list->created_at }}</td>
 
- <!-- 更新ボタンの実装 -->
- <td><a class="btn btn-primary" href="/post/{{ $list->id }}/update-form">更新</a></td>
- <!-- 削除ボタンの実装 -->
- <td><a class="btn btn-danger" href="/post/{{ $list->id }}/delete"
- onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')">削除</a></td>
+
+<!-- ユーザーがログインしており、かつログインしているユーザーの名前が表示されている投稿（$list）のユーザー名と一致する場合 -->
+@if(Auth::check() && Auth::user()->name == $list->user_name)
+<!-- 更新ボタンの実装 -->
+    <td><a class="btn btn-primary" href="/post/{{ $list->id }}/update-form">更新</a></td>
+    <!-- 削除ボタンの実装 -->
+    <td><a class="btn btn-danger" href="/post/{{ $list->id }}/delete"
+        onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')">削除</a></td>
+@endif
 
  </tr>
 
